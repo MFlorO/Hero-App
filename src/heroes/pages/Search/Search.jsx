@@ -3,6 +3,7 @@ import {HeroeCard} from "../../components";
 import { useForm } from "../../hooks";
 
 import queryString from "query-string"  //Es un paquete que me maneja las queries
+import { getHeroesByName } from "../../helpers";
 
 
 
@@ -11,12 +12,10 @@ const Search = () => {
   const navigate = useNavigate()
   const location = useLocation()
 
-  const {searchValue, onInputChange} = useForm({
-    searchValue: ""
-  })
-
-  const {q = ""} = queryString.parse(location.search)    //Obtengo la query de mi ruta
-
+  const {q = ""} = queryString.parse(location.search);    //Obtengo la query de mi ruta
+  const heroes = getHeroesByName(q);
+  
+  const {searchValue, onInputChange, setFormState} = useForm({searchValue: ""})
 
   const searchValueTrim = searchValue.trim().length <= 1
 
@@ -26,7 +25,8 @@ const Search = () => {
     if(searchValueTrim) return
 
     navigate(`?q=${searchValue}`)
-    console.log({searchValue})
+
+    setFormState({searchValue: ""}) //Reseteo el formulario
   }
   
   return (
@@ -54,10 +54,14 @@ const Search = () => {
         <div className="col-7">
           <h4>Results</h4>
 
-          <div className="alert alert-primary">Buscar a hero</div>
-          {q !== "" && <div className="alert alert-danger"><b>No hay resultados con {q}</b></div>}
+          {heroes.length === 0 && <div className="alert alert-primary">Buscar a hero</div>}
 
-          {/* <HeroeCard {... }/> */}
+          {q !== "" && heroes.length === 0 && <div className="alert alert-danger"><b>No hay resultados con {q}</b></div>}
+
+          {heroes.map(h => (
+             <HeroeCard key={h.id} {...h }/> 
+          ))}
+
         </div>
       </div>
     </>
