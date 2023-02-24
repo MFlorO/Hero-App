@@ -54,7 +54,7 @@ const Search = () => {
         <div className="col-7">
           <h4>Results</h4>
 
-          {heroes.length === 0 && <div className="alert alert-primary">Buscar a hero</div>}
+          {q === "" && <div className="alert alert-primary">Buscar a hero</div>}
 
           {q !== "" && heroes.length === 0 && <div className="alert alert-danger"><b>No hay resultados con {q}</b></div>}
 
