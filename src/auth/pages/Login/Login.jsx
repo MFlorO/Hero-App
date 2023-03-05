@@ -10,9 +10,11 @@ const Login = () => {
 
   const onLogin = () => {
 
+    const lastPath = localStorage.getItem('lastpath') || '/'    // Busco en el localtorage la ultima ruta. Si hay me lleva a esa sino a "/"
+
     login('Florencia Oldani') //Ejecuto la funcion que creamos en el provider
 
-    navigate('/', { replace: true })
+    navigate(lastPath, { replace: true })
   }
 
   return (
