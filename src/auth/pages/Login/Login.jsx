@@ -1,10 +1,19 @@
+import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../context';
 
 const Login = () => {
 
+  const { login } = useContext(AuthContext) //Obtengo los valores del context
+
   const navigate = useNavigate();
 
-  const onLogin = () => navigate('/', { replace: true })
+  const onLogin = () => {
+
+    login('Florencia Oldani') //Ejecuto la funcion que creamos en el provider
+
+    navigate('/', { replace: true })
+  }
 
   return (
     <div className='container mt-5'>
