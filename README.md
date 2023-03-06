@@ -23,7 +23,6 @@ Para chequear que versiones tiene instaladas:
 > npm -v
 
 ## Instrucciones para correr el servidor de desarrollo
-**ESTE REPOSITORIO SOLO ES EL FRONT DE LA APLICACION**
 
 1. Clonar el repositorio
 2. Correr los siguientes comandos:
